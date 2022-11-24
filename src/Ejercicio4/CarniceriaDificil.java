@@ -20,12 +20,12 @@ public class CarniceriaDificil implements Runnable {
                 Accion("charcutería");
                 semaforo2.release();
             }
-            //Comprueba si existen permisos en el semáforo
+            //Si ha entrado se va a la charcutería
             if(carniceria){
                 semaforo2.acquire();
                 Accion("charcutería");
                 semaforo2.release();
-            }else{//Si no existen permisos se va al segundo semáforo
+            }else{//Si no ha entrado se va a la carnicería
                 semaforo.acquire();
                 Accion("carnicería");
                 semaforo.release();
