@@ -6,7 +6,7 @@ public class Carniceria implements Runnable {
 
     Semaphore semaforo = new Semaphore(4);
     @Override
-    public  void run() {
+    public void run() {
         try{
             semaforo.acquire();
             System.out.println("Soy el "+ Thread.currentThread().getName() +" y estoy siendo atendido.");

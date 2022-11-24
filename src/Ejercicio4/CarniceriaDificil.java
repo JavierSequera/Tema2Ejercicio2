@@ -6,20 +6,22 @@ public class CarniceriaDificil implements Runnable {
     Semaphore semaforo = new Semaphore(4);
     Semaphore semaforo2 = new Semaphore(2);
     @Override
-    public  void run() {
+    public void run() {
         try{
+            Boolean carniceria = false;
             //Comprueba si existen permisos en el semáforo
             if(semaforo.availablePermits()>0){
                 semaforo.acquire();
                 Accion("carnicería");
                 semaforo.release();
+                carniceria = true;
             }else{ //Si no existen permisos se va al segundo semáforo
                 semaforo2.acquire();
                 Accion("charcutería");
                 semaforo2.release();
             }
             //Comprueba si existen permisos en el semáforo
-            if(semaforo2.availablePermits()>0){
+            if(carniceria){
                 semaforo2.acquire();
                 Accion("charcutería");
                 semaforo2.release();
@@ -45,7 +47,7 @@ public class CarniceriaDificil implements Runnable {
     }
 
     public static void main(String[] args) {
-        Carniceria sb = new Carniceria();
+        CarniceriaDificil sb = new CarniceriaDificil();
         for(int i=0; i<10; i++) {
             Thread hilo = new Thread(sb);
             hilo.setName("hilo "+i);
